@@ -274,7 +274,7 @@ void CFG::makeCNF()
             char left=p[i].first;
             string temp=p[i].second;
             char first_char=temp[0];
-            temp.erase(0,1);
+            temp=temp.substr(1);
             if(myMap2.find(temp)!=myMap2.end())
             {
                 string to_insert="";
@@ -292,6 +292,7 @@ void CFG::makeCNF()
                 p.erase(p.begin()+i);
                 p.push_back(make_pair(left, to_insert));
             }
+            i--;
         }
     }
 
@@ -332,6 +333,15 @@ int main()
     CFG obj3(s3, t3, n3, p3);
     obj3.process();
     obj3.showData();
+    cout<<endl<<endl;
+
+    char s4='K';
+    vector <char> t4{'+','*','(',')','g'};
+    vector <char> n4{'K','T','F'};
+    vector <pair<char, string>> p4{make_pair('K',"K+T"),make_pair('K',"T"),make_pair('T',"T*F"),make_pair('T',"F"),make_pair('F',"(K)"),make_pair('F',"g")};
+    CFG obj4(s4, t4, n4, p4);
+    obj4.process();
+    obj4.showData();
     cout<<endl<<endl;
 
     return 0;
